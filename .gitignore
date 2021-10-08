@@ -1,18 +1,19 @@
-# dependencies
+# Dependencies
 node_modules/
 .pnp/
 package-lock.json
-.pnp.js
 
-# production
+# Yarn files
+.yarn/install-state.gz
+.yarn/build-state.yml
+
+# Production
 build/
-dist/
-out/
-.next/
-.tsbuildinfo
-sitemap.xml
-sw.js
-workbox*.js
+
+# Generated Files
+.docusaurus/
+.cache-loader/
+docs/api/
 
 # misc
 .DS_Store

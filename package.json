@@ -1,5 +1,5 @@
 {
-	"name": "root",
+	"name": "root-website",
 	"version": "1.0.0",
 	"workspaces": [
 		"projects/*"
@@ -23,7 +23,13 @@
 		"clean": "node scripts/clean.mjs",
 		"format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,json,md}",
 		"update": "yarn upgrade-interactive --latest",
-		"prepare": "husky install .github/husky"
+		"prepare": "husky install .github/husky",
+		"vercel-build": "yarn remove-submodule-lockfiles && yarn build-all-projects && yarn build",
+		"remove-submodule-lockfiles": "node scripts/remove-submodule-lockfiles.mjs",
+		"restore-project-lockfiles": "node scripts/restore-project-lockfiles.mjs",
+		"build-all-projects": "yarn build-all-projects-sequential && yarn build-all-projects-parallel",
+		"build-all-projects-sequential": "yarn workspace root-utilities build:123 && yarn workspace @sapphire/pieces build && yarn workspace @sapphire/framework build && yarn workspace root-utilities build:4",
+		"build-all-projects-parallel": "concurrently --kill-others-on-fail --names \"Plugins,Cli,Type\" \"yarn workspace root-plugins build\" \"yarn workspace @sapphire/cli build\" \"yarn workspace @sapphire/type build\""
 	},
 	"dependencies": {
 		"@docusaurus/core": "2.0.0-beta.6",
@@ -46,11 +52,13 @@
 		"@sapphire/prettier-config": "^1.1.6",
 		"@sapphire/ts-config": "^3.1.0",
 		"@tsconfig/docusaurus": "^1.0.4",
+		"@types/concurrently": "^6",
 		"@types/node": "^16.9.1",
 		"@types/react": "^17.0.27",
 		"@types/react-dom": "^17.0.9",
 		"@typescript-eslint/eslint-plugin": "^4.32.0",
 		"@typescript-eslint/parser": "^4.32.0",
+		"concurrently": "^6.3.0",
 		"cz-conventional-changelog": "^3.3.0",
 		"docusaurus-plugin-typedoc": "^0.16.3",
 		"eslint": "^7.32.0",

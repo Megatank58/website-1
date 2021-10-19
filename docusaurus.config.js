@@ -17,11 +17,50 @@ const config = {
 	plugins: [
 		[
 			'docusaurus-plugin-typedoc',
-
-			// Plugin / TypeDoc options
 			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
+				id: '@sapphire/framework',
 				entryPoints: ['./projects/framework/src/index.ts'],
 				tsconfig: './projects/framework/src/tsconfig.json'
+			})
+		],
+		[
+			'docusaurus-plugin-typedoc',
+			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
+				id: '@sapphire/pieces',
+				entryPoints: ['./projects/pieces/src/index.ts'],
+				tsconfig: './projects/pieces/src/tsconfig.json'
+			})
+		],
+		[
+			'docusaurus-plugin-typedoc',
+			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
+				id: 'Sapphire Utilities',
+				entryPoints: ['./projects/utilities/package.json'],
+				tsconfig: './projects/utilities/tsconfig.dev.json'
+			})
+		],
+		[
+			'docusaurus-plugin-typedoc',
+			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
+				id: 'Sapphire Plugins',
+				entryPoints: ['./projects/plugins/package.json'],
+				tsconfig: './projects/plugins/tsconfig.base.json'
+			})
+		],
+		[
+			'docusaurus-plugin-typedoc',
+			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
+				id: '@sapphire/cli',
+				entryPoints: ['./projects/cli/src/index.ts'],
+				tsconfig: './projects/cli/src/tsconfig.json'
+			})
+		],
+		[
+			'docusaurus-plugin-typedoc',
+			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
+				id: '@sapphire/type',
+				entryPoints: ['./projects/type/src/index.ts'],
+				tsconfig: './projects/type/src/tsconfig.json'
 			})
 		]
 	],

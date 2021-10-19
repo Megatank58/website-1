@@ -19,10 +19,10 @@ const config = {
 			'docusaurus-plugin-typedoc',
 
 			// Plugin / TypeDoc options
-			{
+			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
 				entryPoints: ['./projects/framework/src/index.ts'],
 				tsconfig: './projects/framework/src/tsconfig.json'
-			}
+			})
 		]
 	],
 

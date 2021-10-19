@@ -1,3 +1,4 @@
 [submodule "projects/framework"]
 	path = projects/framework
 	url = https://github.com/sapphiredev/framework
+	branch = main

@@ -1,14 +1,20 @@
-import { readdir } from 'fs/promises';
-import { execSync } from 'node:child_process';
+import { rename } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 
 const projectsDir = new URL('../projects/', import.meta.url);
-const projects = (await readdir(projectsDir)).map((dirName) => new URL(dirName, projectsDir));
+const backupDir = new URL('backup/', import.meta.url);
 
-const yarnLockDelete = /deleted:\s+ yarn.lock/;
+const paths = ['cli', 'framework', 'pieces', 'plugins', 'type', 'utilities'];
 
-for (const project of projects) {
-	const res = execSync(`git status`, { cwd: project, encoding: 'utf8' });
-	if (yarnLockDelete.test(res)) {
-		execSync(`git checkout -q yarn.lock`, { cwd: project });
-	}
-}
+await Promise.all(
+	paths.map((id) => {
+		const oldFile = new URL(`${id}-yarn.lock`, backupDir);
+		const newFile = new URL(`${id}/yarn.lock`, projectsDir);
+
+		if (existsSync(oldFile)) {
+			return rename(oldFile, newFile);
+		}
+
+		return null;
+	})
+);

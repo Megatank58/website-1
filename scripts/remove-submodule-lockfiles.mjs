@@ -1,45 +1,20 @@
-import { opendir, rm } from 'node:fs/promises';
-import { join } from 'node:path';
+import { existsSync } from 'node:fs';
+import { rename } from 'node:fs/promises';
 
-async function* scan(path, cb) {
-	const dir = await opendir(path);
+const projectsDir = new URL('../projects/', import.meta.url);
+const backupDir = new URL('backup/', import.meta.url);
 
-	for await (const item of dir) {
-		const file = join(dir.path, item.name);
-		if (item.isFile()) {
-			if (cb(file)) {
-				yield file;
-			}
-		} else if (item.isDirectory()) {
-			if (!illegalFoldersToNavigate.includes(item.name)) {
-				yield* scan(file, cb);
-			}
+const paths = ['cli', 'framework', 'pieces', 'plugins', 'type', 'utilities'];
+
+await Promise.all(
+	paths.map((id) => {
+		const oldFile = new URL(`${id}/yarn.lock`, projectsDir);
+		const newFile = new URL(`${id}-yarn.lock`, backupDir);
+
+		if (existsSync(oldFile)) {
+			return rename(oldFile, newFile);
 		}
-	}
-}
 
-const projectsDir = new URL('../projects', import.meta.url);
-const cb = (path) => path.endsWith('yarn.lock');
-
-const illegalFoldersToNavigate = [
-	'.devcontainer',
-	'.git',
-	'.github',
-	'.vscode',
-	'.yarn',
-	'dist',
-	'guides',
-	'lib',
-	'node_modules',
-	'prebuild',
-	'scripts',
-	'src',
-	'tests'
-];
-const paths = [];
-
-for await (const path of scan(projectsDir, cb)) {
-	paths.push(path);
-}
-
-await Promise.all(paths.map((path) => rm(path, { force: true, recursive: true })));
+		return null;
+	})
+);

@@ -2,18 +2,18 @@
 	path = projects/framework
 	url = https://github.com/sapphiredev/framework
 	branch = main
-[submodule ".\\projects\\pieces"]
-	path = .\\projects\\pieces
+[submodule "projects/pieces"]
+	path = projects/pieces
 	url = https://github.com/sapphiredev/pieces
-[submodule ".\\projects\\utilities"]
-	path = .\\projects\\utilities
+[submodule "projects/utilities"]
+	path = projects/utilities
 	url = https://github.com/sapphiredev/utilities
-[submodule ".\\projects\\plugins"]
-	path = .\\projects\\plugins
+[submodule "projects/plugins"]
+	path = projects/plugins
 	url = https://github.com/sapphiredev/plugins
-[submodule ".\\projects\\cli"]
-	path = .\\projects\\cli
+[submodule "projects/cli"]
+	path = projects/cli
 	url = https://github.com/sapphiredev/cli
-[submodule ".\\projects\\type"]
-	path = .\\projects\\type
+[submodule "projects/type"]
+	path = projects/type
 	url = https://github.com/sapphiredev/type

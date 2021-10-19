@@ -28,7 +28,7 @@
 		"remove-submodule-lockfiles": "node scripts/remove-submodule-lockfiles.mjs",
 		"restore-project-lockfiles": "node scripts/restore-project-lockfiles.mjs",
 		"build-all-projects": "yarn build-all-projects-sequential && yarn build-all-projects-parallel",
-		"build-all-projects-sequential": "yarn workspace root-utilities build:123 && yarn workspace @sapphire/pieces build && yarn workspace @sapphire/framework build && yarn workspace root-utilities build:4",
+		"build-all-projects-sequential": "yarn workspace root-utilities build:123 && yarn workspace @sapphire/pieces prepublishOnly && yarn workspace @sapphire/framework prepublishOnly && yarn workspace root-utilities build:4",
 		"build-all-projects-parallel": "concurrently --kill-others-on-fail --names \"Plugins,Cli,Type\" \"yarn workspace root-plugins build\" \"yarn workspace @sapphire/cli build\" \"yarn workspace @sapphire/type build\""
 	},
 	"dependencies": {

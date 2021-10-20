@@ -13,17 +13,14 @@ build/
 # Generated Files
 .docusaurus/
 .cache-loader/
-docs/api/
+docs/Documentation/
 
 # misc
 .DS_Store
 Thumbs.db
 
 # Local env vars
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env
 
 # IDE Settings
 .idea/

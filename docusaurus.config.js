@@ -9,59 +9,93 @@ const config = {
 	onBrokenLinks: 'throw',
 	onBrokenMarkdownLinks: 'warn',
 	favicon: 'img/favicon.ico',
-	organizationName: 'sapphiredev', // Usually your GitHub org/user name.
-	projectName: 'framework', // Usually your repo name.
+	organizationName: 'sapphiredev',
+	projectName: 'framework',
 
 	themes: ['@docusaurus/theme-live-codeblock'],
 
 	plugins: [
 		[
 			'docusaurus-plugin-typedoc',
-			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
-				id: '@sapphire/framework',
+			{
+				id: 'framework',
 				entryPoints: ['./projects/framework/src/index.ts'],
-				tsconfig: './projects/framework/src/tsconfig.json'
-			})
+				tsconfig: './projects/framework/src/tsconfig.json',
+				readme: 'none',
+				out: 'Documentation/api-framework',
+				sidebar: {
+					categoryLabel: '@sapphire/framework',
+					position: 0,
+					fullNames: true
+				},
+				watch: process.env.TYPEDOC_WATCH
+			}
 		],
 		[
 			'docusaurus-plugin-typedoc',
-			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
-				id: '@sapphire/pieces',
+			{
+				id: 'Pieces',
 				entryPoints: ['./projects/pieces/src/index.ts'],
-				tsconfig: './projects/pieces/src/tsconfig.json'
-			})
+				tsconfig: './projects/pieces/src/tsconfig.json',
+				readme: 'none',
+				out: 'Documentation/api-pieces',
+				sidebar: {
+					categoryLabel: '@sapphire/pieces',
+					position: 1,
+					fullNames: true
+				},
+				watch: process.env.TYPEDOC_WATCH
+			}
 		],
 		[
 			'docusaurus-plugin-typedoc',
-			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
-				id: 'Sapphire Utilities',
-				entryPoints: ['./projects/utilities/package.json'],
-				tsconfig: './projects/utilities/tsconfig.dev.json'
-			})
+			{
+				id: 'Utilities',
+				entryPoints: ['./projects/utilities/'],
+				entryPointStrategy: 'packages',
+				tsconfig: './projects/utilities/tsconfig.dev.json',
+				readme: 'none',
+				out: 'Documentation/api-utilities',
+				sidebar: {
+					categoryLabel: 'Sapphire Utilities',
+					position: 2,
+					fullNames: true
+				},
+				watch: process.env.TYPEDOC_WATCH
+			}
 		],
 		[
 			'docusaurus-plugin-typedoc',
-			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
-				id: 'Sapphire Plugins',
-				entryPoints: ['./projects/plugins/package.json'],
-				tsconfig: './projects/plugins/tsconfig.base.json'
-			})
+			{
+				id: 'Plugins',
+				entryPoints: ['./projects/plugins/'],
+				entryPointStrategy: 'packages',
+				tsconfig: './projects/plugins/tsconfig.base.json',
+				readme: 'none',
+				out: 'Documentation/api-plugins',
+				sidebar: {
+					categoryLabel: 'Sapphire Plugins',
+					position: 3,
+					fullNames: true
+				},
+				watch: process.env.TYPEDOC_WATCH
+			}
 		],
 		[
 			'docusaurus-plugin-typedoc',
-			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
-				id: '@sapphire/cli',
-				entryPoints: ['./projects/cli/src/index.ts'],
-				tsconfig: './projects/cli/src/tsconfig.json'
-			})
-		],
-		[
-			'docusaurus-plugin-typedoc',
-			/** @type {Parameters<import('docusaurus-plugin-typedoc')['default']>[1]} */ ({
-				id: '@sapphire/type',
+			{
+				id: 'Type',
 				entryPoints: ['./projects/type/src/index.ts'],
-				tsconfig: './projects/type/src/tsconfig.json'
-			})
+				tsconfig: './projects/type/src/tsconfig.json',
+				readme: 'none',
+				out: 'Documentation/api-type',
+				sidebar: {
+					categoryLabel: '@sapphire/type',
+					position: 4,
+					fullNames: true
+				},
+				watch: process.env.TYPEDOC_WATCH
+			}
 		]
 	],
 
@@ -91,21 +125,31 @@ const config = {
 		/** @type {Partial<import('@docusaurus/preset-classic').ThemeConfig>} */
 		({
 			navbar: {
-				title: 'My Site',
+				title: 'Sapphire',
 				logo: {
-					alt: 'My Site Logo',
-					src: 'img/logo.svg'
+					alt: 'Sapphire Logo',
+					src: 'img/gem.svg'
 				},
 				items: [
 					{
-						type: 'doc',
-						docId: 'intro',
+						to: '/',
+						label: 'Home',
 						position: 'left',
-						label: 'Tutorial'
+						activeBaseRegex: '^/$'
 					},
-					{ to: '/blog', label: 'Blog', position: 'left' },
 					{
-						href: 'https://github.com/facebook/docusaurus',
+						type: 'doc',
+						docId: 'General/Welcome',
+						position: 'left',
+						label: 'Documentation'
+					},
+					{
+						href: 'https://sapphirejs.dev/discord',
+						label: 'Discord',
+						position: 'right'
+					},
+					{
+						href: 'https://github.com/sapphiredev',
 						label: 'GitHub',
 						position: 'right'
 					}
